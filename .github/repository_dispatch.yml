@@ -1,3 +1,9 @@
+name: Dispatch on Release
+
+on:
+  release:
+    types: [published]
+
 jobs:
   dispatch:
     - name: Dispatch repository_dispatch event

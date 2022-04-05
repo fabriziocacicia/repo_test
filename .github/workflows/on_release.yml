@@ -15,4 +15,4 @@ jobs:
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           type: repository
-          ident: repo_test_update # refer to on.repository_dispatch.types.*
+          ident: repo_test_update

@@ -16,3 +16,4 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           type: repository
           ident: repo_test_update
+          payload: '{}' # json

@@ -21,4 +21,4 @@ jobs:
         uses: exions/undo-push@v1
         with:
           #branch: ${{ github.event.inputs.branch }}
-          branch: ${{ github.ref_name }}
+          branch: ${{ github.head_name }}

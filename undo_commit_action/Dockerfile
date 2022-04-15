@@ -1,6 +1,6 @@
-FROM debian:9.5-slim
+FROM alpine:latest
 
-RUN apt-get install git-all
+RUN apk add --update --no-cache git
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

@@ -1,0 +1,13 @@
+name: Check Conventional Commit
+on:
+  push:
+
+jobs:
+  build:
+    name: Check Conventional Commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+           fetch-depth: 0
+      - uses: ./conventional_commit_action

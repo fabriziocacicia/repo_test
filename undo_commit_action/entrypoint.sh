@@ -2,4 +2,4 @@
 
 cd "${GITHUB_WORKSPACE}"
 
-git log
+sh -c "git log"

@@ -1,6 +1,6 @@
 FROM debian:9.5-slim
 
-RUN apt install git-all
+RUN apt-get install git-all
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

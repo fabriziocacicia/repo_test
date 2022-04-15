@@ -1,6 +1,5 @@
 name: Manual Undo Push Action
 on:
-  push:
   workflow_dispatch:
     inputs:
       branch:
@@ -52,11 +51,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-           branch: ${{ env.CI_REF }}
+           branch: ${{ github.event.inputs.branch }}
            fetch-depth: 0 
       
       - name: Undo Push
         uses: exions/undo-push@v1
         with:
-          #branch: ${{ github.event.inputs.branch }}
-          branch: ${{ env.CI_REF }}
+          branch: ${{ github.event.inputs.branch }}

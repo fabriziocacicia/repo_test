@@ -52,11 +52,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-           ref: main
+           branch: ${{ env.CI_REF }}
            fetch-depth: 0 
       
       - name: Undo Push
         uses: exions/undo-push@v1
         with:
           #branch: ${{ github.event.inputs.branch }}
-          branch: main
+          branch: ${{ env.CI_REF }}

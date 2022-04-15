@@ -1,0 +1,11 @@
+name: "Undo Last Commit"
+description: "Undo Last Commit"
+author: "mail@fabriziocacicia.com"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "mic"
+  color: "black"

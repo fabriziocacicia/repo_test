@@ -1,6 +1,6 @@
-FROM alpine:latest
+FROM node:16
 
-RUN apk add --update --no-cache git
+RUN npm install --save-dev @commitlint/config-conventional @commitlint/cli
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

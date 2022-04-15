@@ -1,0 +1,11 @@
+name: "Check Conventional Commit"
+description: "Check Conventional Commit"
+author: "mail@fabriziocacicia.com"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "mic"
+  color: "black"

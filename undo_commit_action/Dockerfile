@@ -1,6 +1,6 @@
 FROM debian:9.5-slim
 
-RUN apk add --no-cache git
+RUN apt install git-all
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

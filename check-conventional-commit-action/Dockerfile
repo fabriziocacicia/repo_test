@@ -1,6 +1,6 @@
-FROM node:16
+FROM node:alpine
 
-RUN npm install --save-dev @commitlint/config-conventional @commitlint/cli
+RUN npm install -g --save-dev @commitlint/config-conventional @commitlint/cli
 RUN echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
 
 ADD entrypoint.sh /entrypoint.sh

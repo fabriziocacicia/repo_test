@@ -10,8 +10,16 @@ jobs:
       - uses: actions/checkout@v3
         with:
            fetch-depth: 0
-      - uses: dkhunt27/action-conventional-commits@v1.1.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check Conventional Commit
+        uses: ./check-conventional-commit-action
+        id: check-conventional-commit
+        continue-on-error: true
+      - name: Check Conventional Commit Failure
+        if: steps.check-conventional-commit.outcome != 'success'
+        run: echo "failure"
+      - name: Check Conventional Commit Success
+        if: steps.check-conventional-commit.outcome == 'success'
+        run: echo "success"
+        
       #- name: Undo Last Commit
       #  uses: fabriziocacicia/undo-latest-commit-action@v0.1.0

@@ -1,4 +1,4 @@
-name: Check Conventional Commit
+name: Undo Commit
 on:
   push:
 

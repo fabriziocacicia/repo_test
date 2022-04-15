@@ -19,6 +19,6 @@ jobs:
         #   fetch-depth: 0 
       - name: Undo Push
         uses: exions/undo-push@v1
-        with:
+        #with:
           #branch: ${{ github.event.inputs.branch }}
-          branch: ${{ github.head_name }}
+          #branch: ${{ github.head_name }}

@@ -2,4 +2,4 @@
 
 cd "${GITHUB_WORKSPACE}"
 
-sh -c "ls"
+sh -c "ls -al"

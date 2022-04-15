@@ -1,6 +1,8 @@
 name: Undo Commit
 on:
-  workflow_dispatch:
+  push:
+    paths-ignore:
+      - '**undo_commit.yml'
 
 jobs:
   build:

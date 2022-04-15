@@ -12,7 +12,7 @@ jobs:
   Undo:
     runs-on: ubuntu-latest
     steps: 
-      - uses: FranzDiebold/github-env-vars-action@v1.2.0
+      - uses: FranzDiebold/github-env-vars-action@v2.3.1
       - name: Print environment variables
         run: |
           echo "GITHUB_REPOSITORY_SLUG=$GITHUB_REPOSITORY_SLUG"

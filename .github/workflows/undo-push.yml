@@ -28,7 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-           ref: ${{ $GITHUB_REF_NAME }}
+           ref: echo ${GITHUB_REF_NAME}
            fetch-depth: 0 
       
       - name: Undo Push

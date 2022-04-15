@@ -28,11 +28,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-           ref: ${{ GITHUB_REF_NAME }}
+           ref: ${{ env.GITHUB_REF_NAME }}
            fetch-depth: 0 
       
       - name: Undo Push
         uses: exions/undo-push@v1
         with:
           #branch: ${{ github.event.inputs.branch }}
-          branch: ${{ GITHUB_REF_NAME }}
+          branch: ${{ env.GITHUB_REF_NAME }}

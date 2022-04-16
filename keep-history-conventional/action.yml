@@ -1,0 +1,21 @@
+name: "Keep History Conventional"
+description: "Github Action that keep in the Github commits history only the ones that follow the Conventional Commit convention."
+author: "mail@fabriziocacicia.com"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Check Latest Commit Conventional
+      uses: fabriziocacicia/check-conventional-latest-commit-action@v0.1.0
+      id: check-conventional-commit
+    - name: Create PR
+      if: ${{ failure() }}
+      run: $GITHUB_ACTION_PATH/create_pr.sh
+      shell: bash
+
+branding:
+  icon: "mic"
+  color: "black"

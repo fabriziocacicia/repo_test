@@ -11,6 +11,8 @@ NEW_BRANCH_NAME="keep_history_conventional/$LATEST_COMMIT_HASH"
 COMMIT_MESSAGE=$(git log -1 --format=%B)
 
 git fetch --all
+git status
 git checkout -b $NEW_BRANCH_NAME
-git commit -m $COMMIT_MESSAGE
+git status
+git commit -a -m $COMMIT_MESSAGE
 git push --set-upstream origin $NEW_BRANCH_NAME

@@ -13,7 +13,7 @@ runs:
       id: check-conventional-commit
       continue-on-error: true
     - name: Create PR
-      if: ${{ failure() }}
+      if: steps.check-conventional-commit.outcome != 'success'
       run: |
         chmod +x $GITHUB_ACTION_PATH/create_pr.sh
         $GITHUB_ACTION_PATH/create_pr.sh

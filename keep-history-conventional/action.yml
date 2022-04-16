@@ -11,6 +11,7 @@ runs:
     - name: Check Latest Commit Conventional
       uses: fabriziocacicia/check-conventional-latest-commit-action@v0.1.0
       id: check-conventional-commit
+      continue-on-error: true
     - name: Create PR
       if: ${{ failure() }}
       run: |

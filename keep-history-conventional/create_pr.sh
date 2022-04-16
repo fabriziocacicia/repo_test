@@ -18,4 +18,4 @@ git checkout -b $NEW_BRANCH_NAME
 git add --all
 git status
 git commit -a -m "$COMMIT_MESSAGE"
-#git push --set-upstream origin $NEW_BRANCH_NAME
+git push --set-upstream origin $NEW_BRANCH_NAME

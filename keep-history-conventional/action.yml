@@ -32,7 +32,7 @@ runs:
       with:
         commit-message: ${{ env.COMMIT_MESSAGE }}
         committer: Keep History Conventional Action <keep-history-conventional-action[bot]@users.noreply.github.com>
-        author: ${{ Keep History Conventional Action }} <keep-history-conventional-action[bot]@users.noreply.github.com>
+        author: Keep History Conventional Action <keep-history-conventional-action[bot]@users.noreply.github.com>
         branch: ${{ env.NEW_BRANCH_NAME }}
         delete-branch: true
         title: ${{ env.COMMIT_MESSAGE }}

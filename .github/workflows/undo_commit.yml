@@ -15,7 +15,7 @@ jobs:
         id: check-conventional-commit
         continue-on-error: true
       - name: Create PR
-        if: ${{ failure() }}
+        if: steps.check-conventional-commit.outcome != 'success'
         uses: ./keep-history-conventional
       #- name: Update composer packages
       #  uses: technote-space/create-pr-action@v2

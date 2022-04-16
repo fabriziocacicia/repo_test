@@ -11,7 +11,7 @@ jobs:
         with:
            fetch-depth: 0
       - name: Check Conventional Commit
-        uses: ./check-conventional-commit-action
+        uses: fabriziocacicia/check-conventional-latest-commit-action@v0.1.0
         id: check-conventional-commit
         continue-on-error: true
       - name: Check Conventional Commit Failure

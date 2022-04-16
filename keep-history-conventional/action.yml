@@ -13,7 +13,9 @@ runs:
       id: check-conventional-commit
     - name: Create PR
       if: ${{ failure() }}
-      run: $GITHUB_ACTION_PATH/create_pr.sh
+      run: |
+        chmod +x $GITHUB_ACTION_PATH/create_pr.sh
+        $GITHUB_ACTION_PATH/create_pr.sh
       shell: bash
 
 branding:

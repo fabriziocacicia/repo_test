@@ -13,9 +13,9 @@ runs:
       id: check-conventional-commit
       continue-on-error: true
     - if: steps.check-conventional-commit.outcome == 'success'
-      run: exit 0
+      run: exit 1
       shell: bash
-    - name: Create PR
+    - name: Prepare PR
       if: steps.check-conventional-commit.outcome != 'success'
       run: |
         chmod +x $GITHUB_ACTION_PATH/create_pr.sh
@@ -28,6 +28,7 @@ runs:
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
       shell: bash
     - name: Create Pull Request
+      if: steps.check-conventional-commit.outcome != 'success'
       uses: peter-evans/create-pull-request@v4
       with:
         commit-message: ${{ env.COMMIT_MESSAGE }}

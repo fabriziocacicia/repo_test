@@ -1,6 +1,6 @@
 name: Undo Commit
 on:
-  push:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -10,24 +10,5 @@ jobs:
       - uses: actions/checkout@v3
         with:
            fetch-depth: 0
-      - name: Create PR
-        uses: ./keep-history-conventional
-      #- name: Update composer packages
-      #  uses: technote-space/create-pr-action@v2
-      #  with:
-      #    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      #    EXECUTE_COMMANDS: |
-      #      LATEST_COMMIT_HASH=$(git rev-parse HEAD)
-      #      LATEST_COMMIT_HASH=$(git log -1 --format=%h)
-      #      NEW_BRANCH_NAME="keep_history_conventional/$LATEST_COMMIT_HASH"
-      #      echo "NEW_BRANCH_NAME=$NEW_BRANCH_NAME" >> $GITHUB_ENV
-      #      COMMIT_MESSAGE=$(git log -1 --format=%B)
-      #      echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
-      #    COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
-      #    COMMIT_NAME: 'GitHub Actions'
-      #    COMMIT_EMAIL: 'github-actions[bot]@users.noreply.github.com'
-      #    PR_BRANCH_NAME: ${{ env.NEW_BRANCH_NAME }}
-      #    PR_TITLE: ${{ env.COMMIT_MESSAGE }}
-        
-      #- name: Undo Last Commit
-      #  uses: fabriziocacicia/undo-latest-commit-action@v0.1.0
+      - name: Undo Last Commit
+        uses: fabriziocacicia/undo-latest-commit-action@v0.1.0

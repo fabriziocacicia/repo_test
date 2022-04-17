@@ -9,7 +9,7 @@ runs:
       with:
         fetch-depth: 0
     - name: Check Latest Commit Conventional
-      uses: fabriziocacicia/check-conventional-latest-commit-action@v0.1.0
+      uses: fabriziocacicia/check-latest-commit-conventional-action@v0.1.0
       id: check-conventional-commit
       continue-on-error: true
     - if: steps.check-conventional-commit.outcome == 'success'

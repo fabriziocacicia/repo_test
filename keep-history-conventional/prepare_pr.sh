@@ -18,6 +18,6 @@ git config --global --add safe.directory /github/workspace
 
 git fetch --all
 git checkout -b $NEW_BRANCH_NAME
-git add --all
-git push --set-upstream origin $NEW_BRANCH_NAME
+#git add --all
+#git push --set-upstream origin $NEW_BRANCH_NAME
 

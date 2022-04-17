@@ -24,8 +24,6 @@ runs:
         echo "NEW_BRANCH_NAME=$NEW_BRANCH_NAME" >> $GITHUB_ENV
         COMMIT_MESSAGE=$(git log -1 --format=%B)
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
-        AUTHOR_NAME=${{ github.actor }}
-        echo "AUTHOR_NAME=$AUTHOR_NAME" >> $GITHUB_ENV
         chmod +x $GITHUB_ACTION_PATH/prepare_pr.sh
         $GITHUB_ACTION_PATH/prepare_pr.sh -b $NEW_BRANCH_NAME
       shell: bash

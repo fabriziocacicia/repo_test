@@ -40,7 +40,7 @@ runs:
         branch: ${{ env.NEW_BRANCH_NAME }}
         delete-branch: true
         title: ${{ env.COMMIT_MESSAGE }}
-        assignees: ${{ env.AUTHOR_NAME }}
+        assignees: ${{ github.actor }}
         body: |
           The commit ${{ env.LATEST_COMMIT_HASH }} doesn't follow the [Conventional Commit convention](https://www.conventionalcommits.org/). 
           Because of that, it was removed from the history of the repository.

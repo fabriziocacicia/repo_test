@@ -29,6 +29,7 @@ runs:
       shell: bash
     - name: Create Pull Request
       run: |
+        gh auth login --with-token
         gh pr create --title "${{ env.COMMIT_MESSAGE }}" --base main --assignee ${{ github.actor }} --body "The commit ${{ env.LATEST_COMMIT_HASH }} doesn't follow the [Conventional Commit convention](https://www.conventionalcommits.org/)."
       shell: bash
     #- name: Create Pull Request

@@ -25,9 +25,11 @@ runs:
         COMMIT_MESSAGE=$(git log -1 --format=%B)
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
         chmod +x $GITHUB_ACTION_PATH/prepare_pr.sh
+        echo $NEW_BRANCH_NAME
         $GITHUB_ACTION_PATH/prepare_pr.sh -b $NEW_BRANCH_NAME
       shell: bash
     - name: Create Pull Request
+      if: steps.check-conventional-commit.outcome != 'success'
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |

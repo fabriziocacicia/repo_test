@@ -3,7 +3,7 @@
 while getopts b: flag
 do
     case "${flag}" in
-        f) NEW_BRANCH_NAME=${OPTARG};;
+        b) NEW_BRANCH_NAME=${OPTARG};;
     esac
 done
 

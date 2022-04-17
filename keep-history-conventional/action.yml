@@ -22,7 +22,7 @@ runs:
         echo "LATEST_COMMIT_HASH=$LATEST_COMMIT_HASH" >> $GITHUB_ENV
         NEW_BRANCH_NAME="keep_history_conventional/$LATEST_COMMIT_HASH"
         echo "NEW_BRANCH_NAME=$NEW_BRANCH_NAME" >> $GITHUB_ENV
-        COMMIT_MESSAGE=$(git log -1 --format=%B)%an
+        COMMIT_MESSAGE=$(git log -1 --format=%B)
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
         AUTHOR_NAME=$(git log -1 --format=%an)
         echo "AUTHOR_NAME=$AUTHOR_NAME" >> $GITHUB_ENV

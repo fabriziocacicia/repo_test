@@ -15,17 +15,17 @@ runs:
     - if: steps.check-conventional-commit.outcome == 'success'
       run: exit 0
       shell: bash
-    - name: Prepare PR
+    - name: Prepare Pull Request
       if: steps.check-conventional-commit.outcome != 'success'
       run: |
-        chmod +x $GITHUB_ACTION_PATH/create_pr.sh
-        $GITHUB_ACTION_PATH/create_pr.sh
         LATEST_COMMIT_HASH=$(git log -1 --format=%h)
         echo "LATEST_COMMIT_HASH=$LATEST_COMMIT_HASH" >> $GITHUB_ENV
         NEW_BRANCH_NAME="keep_history_conventional/$LATEST_COMMIT_HASH"
         echo "NEW_BRANCH_NAME=$NEW_BRANCH_NAME" >> $GITHUB_ENV
         COMMIT_MESSAGE=$(git log -1 --format=%B)
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
+        chmod +x $GITHUB_ACTION_PATH/prepare_pr.sh
+        $GITHUB_ACTION_PATH/prepare_pr.sh -h $LATEST_COMMIT_HASH -b $NEW_BRANCH_NAME -c $COMMIT_MESSAGE
       shell: bash
     - name: Create Pull Request
       if: steps.check-conventional-commit.outcome != 'success'

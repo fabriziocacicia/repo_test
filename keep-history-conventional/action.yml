@@ -28,8 +28,9 @@ runs:
         $GITHUB_ACTION_PATH/prepare_pr.sh -b $NEW_BRANCH_NAME
       shell: bash
     - name: Create Pull Request
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        gh auth login --with-token
         gh pr create --title "${{ env.COMMIT_MESSAGE }}" --base main --assignee ${{ github.actor }} --body "The commit ${{ env.LATEST_COMMIT_HASH }} doesn't follow the [Conventional Commit convention](https://www.conventionalcommits.org/)."
       shell: bash
     #- name: Create Pull Request

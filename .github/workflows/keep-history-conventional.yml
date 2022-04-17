@@ -1,0 +1,11 @@
+name: Keep History Conventional
+on:
+  push:
+
+jobs:
+  keep-history-conventional:
+    name: Keep History Conventional
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create PR
+        uses: ./keep-history-conventional

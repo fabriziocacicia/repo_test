@@ -16,6 +16,7 @@ runs:
       run: exit 0
       shell: bash
     - name: Move Latest Commit to PR
+      if: steps.check-conventional-commit.outcome != 'success'
       uses: ./move-latest-commit-to-pr
     #- name: Create New Branch
     #  if: steps.check-conventional-commit.outcome != 'success'

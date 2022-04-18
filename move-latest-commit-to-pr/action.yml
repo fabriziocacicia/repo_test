@@ -22,6 +22,7 @@ runs:
       with:
         fetch-depth: 0
     - name: Create New Branch
+      id: prepare_pr
       run: |
         LATEST_COMMIT_HASH=$(git log -1 --format=%h)
         echo "LATEST_COMMIT_HASH=$LATEST_COMMIT_HASH" >> $GITHUB_ENV
@@ -67,5 +68,5 @@ runs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --title "${{ env.COMMIT_MESSAGE }}" --base main --head ${{ env.NEW_BRANCH_NAME }} --assignee ${{ github.actor }} --body "${{ env.PRBODY }}"
+        gh pr create --title "${{ env.COMMIT_MESSAGE }}" --base main --head ${{ env.NEW_BRANCH_NAME }} --assignee ${{ github.actor }} --body "${{ steps.prepare_pr.outputs.prbody }}"
       shell: bash

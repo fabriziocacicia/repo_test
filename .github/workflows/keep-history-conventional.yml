@@ -1,6 +1,8 @@
 name: Keep History Conventional
 on:
   push:
+    branches:
+      - main
 
 jobs:
   keep-history-conventional:

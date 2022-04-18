@@ -63,11 +63,6 @@ runs:
         chmod +x $GITHUB_ACTION_PATH/prepare_pr.sh
         $GITHUB_ACTION_PATH/prepare_pr.sh -b $NEW_BRANCH_NAME
       shell: bash
-    - name: Set inputs
-      with:
-        prTitle: ${{ env.COMMIT_MESSAGE }}
-        prBody: ${{ env.PRBODY }}
-        headBranch: ${{ env.NEW_BRANCH_NAME }}
     - run: git checkout main
       shell: bash
     - name: Undo Last Commit

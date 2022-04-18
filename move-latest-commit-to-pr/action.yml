@@ -67,7 +67,7 @@ runs:
         echo "::set-output name=PRBODY::$PRBODY"
         
         chmod +x $GITHUB_ACTION_PATH/prepare_pr.sh
-        $GITHUB_ACTION_PATH/prepare_pr.sh -b $NEW_BRANCH_NAME
+        $GITHUB_ACTION_PATH/prepare_pr.sh -b $HEAD_BRANCH_NAME
       shell: bash
     - run: git checkout main
       shell: bash

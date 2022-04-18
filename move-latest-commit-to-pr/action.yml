@@ -24,6 +24,7 @@ runs:
     - name: Create New Branch
       run: |
         LATEST_COMMIT_HASH=$(git log -1 --format=%h)
+        echo "LATEST_COMMIT_HASH=$LATEST_COMMIT_HASH" >> $GITHUB_ENV
         
         if [ -z "${{ github.event.inputs.prTitle }}" ]       
         then
@@ -48,9 +49,8 @@ runs:
           NEW_BRANCH_NAME="keep_history_conventional/$LATEST_COMMIT_HASH"
         else
           NEW_BRANCH_NAME="${{ github.event.inputs.headBranch }}"
-        fi    
+        fi        
         
-        echo "LATEST_COMMIT_HASH=$LATEST_COMMIT_HASH" >> $GITHUB_ENV
         echo "NEW_BRANCH_NAME=$NEW_BRANCH_NAME" >> $GITHUB_ENV
         echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
         echo "NEW_BRANCH_NAME=$NEW_BRANCH_NAME" >> $GITHUB_ENV

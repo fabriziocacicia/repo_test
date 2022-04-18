@@ -15,32 +15,34 @@ runs:
     - if: steps.check-conventional-commit.outcome == 'success'
       run: exit 0
       shell: bash
-    - name: Create New Branch
-      if: steps.check-conventional-commit.outcome != 'success'
-      run: |
-        LATEST_COMMIT_HASH=$(git log -1 --format=%h)
-        echo "LATEST_COMMIT_HASH=$LATEST_COMMIT_HASH" >> $GITHUB_ENV
-        NEW_BRANCH_NAME="keep_history_conventional/$LATEST_COMMIT_HASH"
-        echo "NEW_BRANCH_NAME=$NEW_BRANCH_NAME" >> $GITHUB_ENV
-        COMMIT_MESSAGE=$(git log -1 --format=%B)
-        echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
-        chmod +x $GITHUB_ACTION_PATH/prepare_pr.sh
-        echo $NEW_BRANCH_NAME
-        $GITHUB_ACTION_PATH/prepare_pr.sh -b $NEW_BRANCH_NAME
-      shell: bash
-    - if: steps.check-conventional-commit.outcome != 'success'
-      run: git checkout main
-      shell: bash
-    - name: Undo Last Commit
-      if: steps.check-conventional-commit.outcome != 'success'
-      uses: fabriziocacicia/undo-latest-commit-action@v0.1.0
-    - name: Create Pull Request
-      if: steps.check-conventional-commit.outcome != 'success'
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      run: |
-        gh pr create --title "${{ env.COMMIT_MESSAGE }}" --base main --head ${{ env.NEW_BRANCH_NAME }} --assignee ${{ github.actor }} --body "The commit ${{ env.LATEST_COMMIT_HASH }} doesn't follow the [Conventional Commit convention](https://www.conventionalcommits.org/)."
-      shell: bash
+    - name: Move Latest Commit to PR
+      uses: ./move-latest-commit-to-pr
+    #- name: Create New Branch
+    #  if: steps.check-conventional-commit.outcome != 'success'
+    #  run: |
+    #    LATEST_COMMIT_HASH=$(git log -1 --format=%h)
+    #    echo "LATEST_COMMIT_HASH=$LATEST_COMMIT_HASH" >> $GITHUB_ENV
+    #    NEW_BRANCH_NAME="keep_history_conventional/$LATEST_COMMIT_HASH"
+    #    echo "NEW_BRANCH_NAME=$NEW_BRANCH_NAME" >> $GITHUB_ENV
+    #    COMMIT_MESSAGE=$(git log -1 --format=%B)
+    #    echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
+    #    chmod +x $GITHUB_ACTION_PATH/prepare_pr.sh
+    #    echo $NEW_BRANCH_NAME
+    #    $GITHUB_ACTION_PATH/prepare_pr.sh -b $NEW_BRANCH_NAME
+    #  shell: bash
+    #- if: steps.check-conventional-commit.outcome != 'success'
+    #  run: git checkout main
+    #  shell: bash
+    #- name: Undo Last Commit
+    #  if: steps.check-conventional-commit.outcome != 'success'
+    #  uses: fabriziocacicia/undo-latest-commit-action@v0.1.0
+    #- name: Create Pull Request
+    #  if: steps.check-conventional-commit.outcome != 'success'
+    #  env:
+    #    GITHUB_TOKEN: ${{ github.token }}
+    #  run: |
+    #    gh pr create --title "${{ env.COMMIT_MESSAGE }}" --base main --head ${{ env.NEW_BRANCH_NAME }} --assignee ${{ github.actor }} --body "The commit ${{ env.LATEST_COMMIT_HASH }} doesn't follow the [Conventional Commit convention](https://www.conventionalcommits.org/)."
+    #  shell: bash
 
 branding:
   icon: "mic"

@@ -18,6 +18,8 @@ runs:
     - name: Move Latest Commit to PR
       if: steps.check-conventional-commit.outcome != 'success'
       uses: ./move-latest-commit-to-pr
+      with:
+        prBody: "Pr Body"
     #- name: Create New Branch
     #  if: steps.check-conventional-commit.outcome != 'success'
     #  run: |

@@ -67,7 +67,7 @@ runs:
         else
           HEAD_BRANCH_NAME="${{ inputs.headBranch }}/$LATEST_COMMIT_HASH"
         fi            
-        echo "HEAD_BRANCH_NAME=$HEAD_BRANCH_NAME" >> $GITHUB_ENV
+        echo "::set-output name=HEAD_BRANCH_NAME::$HEAD_BRANCH_NAME"
         
         
         chmod +x $GITHUB_ACTION_PATH/create_new_branch.sh
@@ -81,5 +81,5 @@ runs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --title "${{ steps.prepare_pr.outputs.pr_title }}" --base ${{ inputs.baseBranch }} --head ${{ env.HEAD_BRANCH_NAME }} --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
+        gh pr create --title "${{ steps.prepare_pr.outputs.pr_title }}" --base ${{ inputs.baseBranch }} --head "${{ steps.prepare_pr.outputs.head_branch_name }}" --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
       shell: bash

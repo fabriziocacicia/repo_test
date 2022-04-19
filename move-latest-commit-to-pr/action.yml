@@ -32,9 +32,12 @@ runs:
         fetch-depth: 0
     - name: Prepare Pull Request
       id: prepare_pr
+      env:
+          GITHUB_CONTEXT: ${{ github.event.inputs.BRANCH_OF_FORK }}
       run: |
         LATEST_COMMIT_HASH=$(git log -1 --format=%h)
-        
+        echo $LATEST_COMMIT_HASH
+        echo ${{ github.event.after }}
         
         if [ -z "${{ inputs.prTitle }}" ]       
         then

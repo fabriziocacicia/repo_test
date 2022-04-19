@@ -11,8 +11,8 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
-      ref: ${{ github.event.inputs.base_branch }}
       with:
+        ref: ${{ github.event.inputs.base_branch }}
         fetch-depth: 0
     - name: Check Latest Commit Conventional
       uses: fabriziocacicia/check-latest-commit-conventional-action@v0.1.0

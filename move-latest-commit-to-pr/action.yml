@@ -4,7 +4,7 @@ author: "mail@fabriziocacicia.com"
 
 inputs:
   prTitle:
-    description: 'The title of the PR'
+    description: 'The title of the PR. (default is the message of the commit that will be moved)'
     required: false
     default: ''
   prBody:
@@ -12,15 +12,15 @@ inputs:
     required: false
     default: ''
   baseBranch:
-    description: 'The branch to which the PR will merge'
+    description: 'The branch to which the PR will merge. (default is main)'
     required: false
     default: 'main'
   headBranch:
-    description: 'The base name of the branch that creates the PR. It will be suffixed by the latest commit hash (i.e. branch_name/hash). If not set the head branch name will be the latest commit has only.'
+    description: 'The base name of the branch that creates the PR. It will be suffixed by the latest commit hash (i.e. branch_name/hash). (default is the hash of the latest commit)'
     required: false
     default: ''
   assignee:
-    description: 'The assignee of the Pull Request. The defualt value is the author of the latest commit.'
+    description: 'The assignee of the Pull Request. (defualt value is the author of the latest commit)'
     required: false
     default: ${{ github.actor }}
     

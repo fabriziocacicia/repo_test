@@ -81,5 +81,5 @@ runs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --title "${{ steps.prepare_pr.outputs.prtitle }}" --base ${{ inputs.baseBranch }} --head ${{ env.HEAD_BRANCH_NAME }} --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
+        gh pr create --title "${{ steps.prepare_pr.outputs.pr_title }}" --base ${{ inputs.baseBranch }} --head ${{ env.HEAD_BRANCH_NAME }} --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
       shell: bash

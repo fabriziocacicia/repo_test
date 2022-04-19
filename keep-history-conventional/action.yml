@@ -10,6 +10,11 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Log event
+      env:
+          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+      run: echo "$GITHUB_CONTEXT"
+      shell: bas
     - uses: actions/checkout@v3
       with:
         ref: ${{ github.event.inputs.base_branch }}

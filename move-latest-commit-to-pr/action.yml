@@ -35,6 +35,7 @@ runs:
       run: |
         LATEST_COMMIT_HASH=$(git log -1 --format=%h)
         
+        
         if [ -z "${{ inputs.prTitle }}" ]       
         then
           LATEST_COMMIT_MESSAGE=$(git log -1 --format=%B)
@@ -42,6 +43,9 @@ runs:
         else
           PR_TITLE=$(${{ inputs.prTitle }})
         fi
+        echo "::set-output name=PR_TITLE::$PR_TITLE"
+        
+        
         if [ -z "${{ inputs.prBody }}" ]
         then
           PRBODY="The commit $LATEST_COMMIT_HASH has been removed from the repository history and moved to this Pull Request.
@@ -51,19 +55,20 @@ runs:
         else
           PRBODY="${{ inputs.prBody }}"
         fi
+        PRBODY="${PRBODY//'%'/'%25'}"
+        PRBODY="${PRBODY//$'\n'/'%0A'}"
+        PRBODY="${PRBODY//$'\r'/'%0D'}"
+        echo "::set-output name=PRBODY::$PRBODY"
+        
+        
         if [ -z "${{ inputs.headBranch }}" ]
         then
           HEAD_BRANCH_NAME="$LATEST_COMMIT_HASH"
         else
           HEAD_BRANCH_NAME="${{ inputs.headBranch }}/$LATEST_COMMIT_HASH"
-        fi        
-        
+        fi            
         echo "HEAD_BRANCH_NAME=$HEAD_BRANCH_NAME" >> $GITHUB_ENV
-        echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
-        PRBODY="${PRBODY//'%'/'%25'}"
-        PRBODY="${PRBODY//$'\n'/'%0A'}"
-        PRBODY="${PRBODY//$'\r'/'%0D'}"
-        echo "::set-output name=PRBODY::$PRBODY"
+        
         
         chmod +x $GITHUB_ACTION_PATH/create_new_branch.sh
         $GITHUB_ACTION_PATH/create_new_branch.sh -b $HEAD_BRANCH_NAME
@@ -76,5 +81,5 @@ runs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --title "${{ env.PR_TITLE }}" --base ${{ inputs.baseBranch }} --head ${{ env.HEAD_BRANCH_NAME }} --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
+        gh pr create --title "${{ steps.prepare_pr.outputs.prtitle }}" --base ${{ inputs.baseBranch }} --head ${{ env.HEAD_BRANCH_NAME }} --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
       shell: bash

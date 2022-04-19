@@ -34,7 +34,6 @@ runs:
       id: prepare_pr
       run: |
         LATEST_COMMIT_HASH=$(git log -1 --format=%h)
-        echo "LATEST_COMMIT_HASH=$LATEST_COMMIT_HASH" >> $GITHUB_ENV
         
         if [ -z "${{ inputs.prTitle }}" ]       
         then

@@ -14,7 +14,7 @@ inputs:
   baseBranch:
     description: 'The branch to which the PR will merge. (default is main)'
     required: false
-    default: 'main'
+    default: $default-branch
   headBranch:
     description: 'The base name of the branch that creates the PR. It will be suffixed by the latest commit hash (i.e. branch_name/hash). (default is the hash of the latest commit)'
     required: false

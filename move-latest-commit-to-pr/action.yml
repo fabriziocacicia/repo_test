@@ -79,7 +79,7 @@ runs:
     - run: git checkout main
       shell: bash
     - name: Undo Last Commit
-      uses: fabriziocacicia/undo-latest-commit-action@v0.1.0
+      uses: fabriziocacicia/undo-commit-action
     - name: Create Pull Request
       env:
         GITHUB_TOKEN: ${{ github.token }}

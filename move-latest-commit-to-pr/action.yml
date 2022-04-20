@@ -81,7 +81,7 @@ runs:
         BRANCH: ${{ inputs.baseBranch }}
       shell: bash
     - name: Undo Last Commit
-      uses: ./undo-commit-action
+      uses: ./undo_commit_action
     - name: Create Pull Request
       env:
         GITHUB_TOKEN: ${{ github.token }}

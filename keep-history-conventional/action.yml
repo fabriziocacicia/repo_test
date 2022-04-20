@@ -5,7 +5,7 @@ author: "mail@fabriziocacicia.com"
 inputs:
   base_branch:
     required: false
-    default: $default-branch
+    default: ${{ github.event.ref }}
 
 runs:
   using: "composite"

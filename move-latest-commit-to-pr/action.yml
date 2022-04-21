@@ -35,12 +35,23 @@ runs:
     - name: Set baseBranch
       id: base_branch
       run: |
-        base_branch=${{ github.event.inputs.level }}
+        base_branch=${{ inputs.baseBranch }}
         
         if [ -z $base_branch ]; then
           base_branch=${{ steps.branch-name.outputs.current_branch }}
         fi
         echo "::set-output name=value::$base_branch"
+      shell: bash    
+    - name: Set baseBranch
+      id: pr_title
+      run: |
+        pr_title=${{ inputs.prTitle }}
+        
+        if [ -z $pr_title ]; then
+          LATEST_COMMIT_MESSAGE=$(git log -1 --format=%B)
+          pr_title=$LATEST_COMMIT_MESSAGE
+        fi
+        echo "::set-output name=value::$pr_title"
       shell: bash    
     - name: Prepare Pull Request
       id: prepare_pr
@@ -48,18 +59,6 @@ runs:
           AFTER_HASH: ${{ github.event.after }}
       run: |
         LATEST_COMMIT_HASH=$(git log -1 --format=%h)
-        echo "latest commit hash $LATEST_COMMIT_HASH"
-        echo "after hash $AFTER_HASH"
-        
-        if [ -z "${{ inputs.prTitle }}" ]       
-        then
-          LATEST_COMMIT_MESSAGE=$(git log -1 --format=%B)
-          PR_TITLE=$LATEST_COMMIT_MESSAGE
-        else
-          PR_TITLE=$(${{ inputs.prTitle }})
-        fi
-        echo "::set-output name=PR_TITLE::$PR_TITLE"
-        
         
         if [ -z "${{ inputs.prBody }}" ]
         then
@@ -98,5 +97,5 @@ runs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --title "${{ steps.prepare_pr.outputs.pr_title }}" --base ${{ steps.base_branch.outputs.value }} --head "${{ steps.prepare_pr.outputs.head_branch_name }}" --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
+        gh pr create --title "${{ steps.pr_title.outputs.value }}" --base ${{ steps.base_branch.outputs.value }} --head "${{ steps.prepare_pr.outputs.head_branch_name }}" --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
       shell: bash

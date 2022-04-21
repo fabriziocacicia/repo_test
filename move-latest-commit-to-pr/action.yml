@@ -39,7 +39,7 @@ runs:
         fi
         echo "::set-output name=value::$base_branch"
       shell: bash    
-    - name: Set baseBranch
+    - name: Set prTitle
       id: pr_title
       run: |
         pr_title=${{ inputs.prTitle }}

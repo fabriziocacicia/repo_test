@@ -10,7 +10,7 @@ inputs:
     description: 'The body of the PR'
     required: false
   baseBranch:
-    description: 'The branch to which the PR will merge. (default is main)'
+    description: 'The branch to which the PR will merge. (default is the branch to which the commit to move belongs to)'
     required: false
   headBranch:
     description: 'The base name of the branch that creates the PR. It will be suffixed by the latest commit hash (i.e. branch_name/hash). (default is the hash of the latest commit)'

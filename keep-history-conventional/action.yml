@@ -2,11 +2,6 @@ name: "Keep History Conventional"
 description: "Github Action that keep in the Github commits history only the ones that follow the Conventional Commit convention."
 author: "mail@fabriziocacicia.com"
 
-inputs:
-  base_branch:
-    required: false
-    default: ${{ github.event.ref }}
-
 runs:
   using: "composite"
   steps:

@@ -84,7 +84,7 @@ runs:
         chmod +x $GITHUB_ACTION_PATH/create_new_branch.sh
         $GITHUB_ACTION_PATH/create_new_branch.sh -b $HEAD_BRANCH_NAME
       shell: bash
-    - run: git checkout $BRANCH
+    - run: git checkout ${{ steps.base_branch.outputs.value }}
       env:
         BRANCH: ${{ steps.base_branch.outputs.value }}
       shell: bash

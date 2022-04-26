@@ -12,8 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: actions-template-sync
-        uses: AndreasAugustin/actions-template-sync@v0.3.1-draft
+        uses: fabriziocacicia/actions-template-sync@v0.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_repo_path: fabriziocacicia/${{ secrets.REPO_NAME }}
           pr_labels: 'type: chore'
+          commit_type: 'build'

@@ -17,4 +17,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_repo_path: fabriziocacicia/${{ secrets.REPO_NAME }}
           pr_labels: 'type: chore'
-          commit_type: 'build'

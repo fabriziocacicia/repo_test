@@ -12,7 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: actions-template-sync
-        uses: fabriziocacicia/actions-template-sync@v0.3.0
+        uses: fabriziocacicia/actions-template-sync@v0.4.0-draft
+
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_repo_path: fabriziocacicia/${{ secrets.REPO_NAME }}

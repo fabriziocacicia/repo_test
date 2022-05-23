@@ -26,4 +26,3 @@ jobs:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           source_repo_path: fabriziocacicia/${{ secrets.REPO_NAME }}
           pr_labels: 'type: chore'
-          gpg_signing_key: ${{ secrets.GPG_SIGNING_KEY }}

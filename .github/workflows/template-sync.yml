@@ -20,3 +20,5 @@ jobs:
           source_repo_path: fabriziocacicia/${{ secrets.REPO_NAME }}
           pr_labels: 'type: chore'
           gpg_signing_key: ${{ secrets.GPG_SIGNING_KEY }}
+          gpg_committer_email: ${{ secrets.GPG_COMMITTER_EMAIL }}
+          gpg_committer_name: ${{ secrets.GPG_COMMITTER_NAME }}

@@ -21,3 +21,6 @@ jobs:
       -
         name: List keys
         run: gpg -K
+      -
+        name: List keys
+        run: gh gpg-key list

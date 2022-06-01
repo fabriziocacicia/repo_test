@@ -22,7 +22,9 @@ jobs:
         name: List keys
         run: gpg -K
       -
-        name: List keys
+        name: List keys GH CLI
         run: gh gpg-key list
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Print ENV
+        run: env

@@ -24,3 +24,5 @@ jobs:
       -
         name: List keys
         run: gh gpg-key list
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

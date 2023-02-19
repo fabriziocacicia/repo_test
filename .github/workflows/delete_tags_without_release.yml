@@ -1,0 +1,12 @@
+name: Delete tags without release
+on:
+  workflow_dispatch
+
+jobs:
+  delete_tags_without_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Tags without Release
+        uses: fabriziocacicia/delete-tags-without-release-action@v0.1.0-draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

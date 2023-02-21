@@ -6,6 +6,9 @@ jobs:
   delete_tags_without_release:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Self Delete Workflow
         uses: fabriziocacicia/self-delete-workflow-action@v0.1.1-draft
         with:

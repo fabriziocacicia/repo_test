@@ -8,5 +8,5 @@ jobs:
     steps:
       - name: Self Delete Workflow
         uses: fabriziocacicia/self-delete-workflow-action@v0.1.1-draft
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        with:
+          personal_access_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

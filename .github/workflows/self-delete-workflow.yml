@@ -11,5 +11,5 @@ jobs:
           fetch-depth: 0
       - name: Self Delete Workflow
         uses: fabriziocacicia/self-delete-workflow-action@v0.1.1-draft
-        with:
-          personal_access_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

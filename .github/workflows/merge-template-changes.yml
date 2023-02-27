@@ -6,6 +6,10 @@ on:
       - completed
 
 jobs:
+  print_conclusion:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo '${{ github.event.workflow_run.conclusion }}'
   on-success:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}

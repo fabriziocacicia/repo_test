@@ -9,7 +9,7 @@ jobs:
   print_workflow_run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo '${{ github.event.workflow_run }}'
+      - run: echo '${{ github.event.workflow_run }}' | jq
   on-new-changes:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}

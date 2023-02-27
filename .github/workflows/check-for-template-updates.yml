@@ -1,9 +1,9 @@
-name: Merge Template Changes
+name: Check for Template Updates
 on:
   workflow_dispatch:
 
 jobs:
-  merge_template_changes:
+  check-for-template-updates:
     if: ${{ vars.TEMPLATE_REPO }}
     runs-on: ubuntu-latest
     steps:

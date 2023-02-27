@@ -27,6 +27,6 @@ jobs:
         with:
           route: PATCH /repos/${{ github.repository}}/actions/variable/TEMPLATE_LATEST_RELEASE
           name: TEMPLATE_LATEST_RELEASE
-          value: '${{ fromJSON(steps.update_template_release.outputs.data).name }}'
+          value: '${{ toJSON(steps.update_template_release.outputs.data).name }}'
         env:
           GITHUB_TOKEN: ${{ github.token }}

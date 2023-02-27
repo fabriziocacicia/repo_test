@@ -6,7 +6,7 @@ on:
       - completed
       
 env:
-  workflow_run: fromJSON(github.event.workflow_run) }
+  workflow_run: fromJSON(github.event.workflow_run)
 
 jobs:
   print_workflow_run:

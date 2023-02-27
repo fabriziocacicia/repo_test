@@ -17,9 +17,6 @@ jobs:
           route: GET /repos/${{ vars.TEMPLATE_REPO }}/releases/latest
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - name: Print Latest Template Release
-        shell: bash
-        run: echo "${{ steps.get_latest_release.outputs.data }}"
       - name: Update template release value
         uses: octokit/request-action@v2.1.7
         id: update_template_release

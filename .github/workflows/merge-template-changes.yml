@@ -1,7 +1,7 @@
 name: Merge Template Changes
 on:
   workflow_run:
-    workflows: [Check for Template Updates]
+    workflows: [Check for Template new Release]
     types:
       - completed
 

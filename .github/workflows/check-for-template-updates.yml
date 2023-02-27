@@ -1,9 +1,9 @@
-name: Check for Template Updates
+name: Check for Template new Release
 on:
   workflow_dispatch:
 
 jobs:
-  check-for-template-updates:
+  check-for-template-new-release:
     if: ${{ vars.TEMPLATE_REPO }}
     runs-on: ubuntu-latest
     steps:

@@ -17,12 +17,16 @@ jobs:
           route: GET /repos/${{ vars.TEMPLATE_REPO }}/releases/latest
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Print Latest Template Release
+        shell: bash
+        run: |
+          echo '${{ fromJSON(steps.update_template_release.outputs.data).name }}'
       - name: Update template release value
         uses: octokit/request-action@v2.1.7
         id: update_template_release
         with:
           route: PATCH /repos/${{ github.repository}}/actions/variable/TEMPLATE_LATEST_RELEASE
           name: TEMPLATE_LATEST_RELEASE
-          value: ${{ steps.update_template_release.outputs.data.name }}
+          value: '${{ fromJSON(steps.update_template_release.outputs.data).name }}'
         env:
           GITHUB_TOKEN: ${{ github.token }}

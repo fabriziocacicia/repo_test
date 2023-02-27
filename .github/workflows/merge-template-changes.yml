@@ -4,15 +4,17 @@ on:
 
 jobs:
   merge_template_changes:
-   if: ${{ vars.TEMPLATE_REPO }}
-   runs-on: ubuntu-latest
+    if: ${{ vars.TEMPLATE_REPO }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: octokit/request-action@v2.1.7
-        id: latest_release
+        id: get_latest_release
         with:
           route: GET /repos/${{ vars.TEMPLATE_REPO }}/releases/latest
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - shell: bash
+        run: echo ${{ steps.get_latest_release.outputs.data }}

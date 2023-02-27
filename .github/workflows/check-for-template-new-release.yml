@@ -25,4 +25,4 @@ jobs:
           name: TEMPLATE_LATEST_RELEASE
           value: '${{ fromJSON(steps.get_latest_release.outputs.data).name }}'
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

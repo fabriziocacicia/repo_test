@@ -22,7 +22,7 @@ jobs:
         uses: octokit/request-action@v2.1.7
         id: update_template_release
         with:
-          route: PATCH /repos/${{ github.repository}}/actions/variable/${{ TEMPLATE_LATEST_RELEASE }}
+          route: PATCH /repos/${{ github.repository}}/actions/variable/TEMPLATE_LATEST_RELEASE
           name: ${{ TEMPLATE_LATEST_RELEASE }}
           value: ${{ steps.get_latest_release.outputs.data }}
         env:

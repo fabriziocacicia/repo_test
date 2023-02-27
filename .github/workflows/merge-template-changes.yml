@@ -4,12 +4,15 @@ on:
     workflows: [Check for Template Updates]
     types:
       - completed
+      
+env:
+  workflow_run: fromJSON(github.event.workflow_run) }
 
 jobs:
   print_workflow_run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ fromJSON(github.event.workflow_run.repository) }}"
+      - run: echo '${{ env.workflow_run }}'
   on-new-changes:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}

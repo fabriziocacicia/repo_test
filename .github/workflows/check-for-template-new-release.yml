@@ -20,7 +20,7 @@ jobs:
       - name: Print Latest Template Release
         shell: bash
         run: |
-          echo '${{ toJSON(steps.update_template_release.outputs.data) }}'
+          echo '${{ toJSON(steps.get_latest_release.outputs.data) }}'
       - name: Update template release value
         uses: octokit/request-action@v2.1.7
         id: update_template_release

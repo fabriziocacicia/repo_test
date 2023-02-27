@@ -10,13 +10,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: octokit/request-action@v2.1.7
+      - name: Get Latest Template Release
+        uses: octokit/request-action@v2.1.7
         id: get_latest_release
         with:
           route: GET /repos/${{ vars.TEMPLATE_REPO }}/releases/latest
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - shell: bash
+      - name: Print Latest Template Release
+        shell: bash
         run: echo ${{ steps.get_latest_release.outputs.data }}
       - name: Update template release value
         uses: octokit/request-action@v2.1.7
@@ -24,6 +26,6 @@ jobs:
         with:
           route: PATCH /repos/${{ github.repository}}/actions/variable/TEMPLATE_LATEST_RELEASE
           name: TEMPLATE_LATEST_RELEASE
-          value: ${{ steps.get_latest_release.outputs.data }}
+          value: ${{ steps.update_template_release.outputs.data }}
         env:
           GITHUB_TOKEN: ${{ github.token }}

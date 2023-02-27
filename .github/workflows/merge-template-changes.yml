@@ -9,7 +9,12 @@ jobs:
   print_workflow_run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo '${{ github.event.workflow_run }}' | jq
+      - uses: actions/github-script@v6
+        id: set-result
+        with:
+          script: echo '${{ github.event.workflow_run.repository }}'
+          result-encoding: string
+      - run: echo "${{steps.set-result.outputs.result}}"
   on-new-changes:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}

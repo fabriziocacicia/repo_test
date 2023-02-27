@@ -6,17 +6,22 @@ on:
       - completed
 
 jobs:
-  print_conclusion:
+  print_workflow_run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo '${{ github.event.workflow_run.conclusion }}'
-  on-success:
+      - run: echo '${{ github.event.workflow_run }}'
+  on-new-changes:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - run: echo 'The triggering workflow passed'
+  on-no-changes:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'skipped' }}
+    steps:
+      - run: echo 'The template has no new release'
   on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-      - run: echo 'The triggering workflow failed'
+      - run: echo 'The Check for Template Updates failed'

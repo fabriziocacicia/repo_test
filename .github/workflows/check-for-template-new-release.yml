@@ -37,7 +37,7 @@ jobs:
         continue-on-error: true
         uses: jackbilestech/semver-compare@1.0.4
         with:
-          head: '${{ steps.latest_release_name.outputs.value}'
+          head: '${{ steps.latest_release_name.outputs.value }}'
           base: '${{ vars.TEMPLATE_LATEST_RELEASE }}'
           operator: '>'
       - name: Print Compare Versions step

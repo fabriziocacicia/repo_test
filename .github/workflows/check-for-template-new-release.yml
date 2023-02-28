@@ -28,7 +28,7 @@ jobs:
         with:
           route: POST /repos/${{ github.repository}}/actions/variables
           name: TEMPLATE_LATEST_RELEASE
-          value: '${{ steps.latest_release_name.outputs.value}'
+          value: '${{ steps.latest_release_name.outputs.value }}'
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}         
       - name: Compare latest template Release with last release update

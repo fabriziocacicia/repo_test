@@ -17,6 +17,32 @@ jobs:
           route: GET /repos/${{ vars.TEMPLATE_REPO }}/releases/latest
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Extract Latest Template Release name
+        id: latest_release_name
+        shell: bash
+        run: echo "value=${{ fromJSON(steps.get_latest_release.outputs.data).name }}" >> $GITHUB_OUTPUT
+      - name: Create Variable with latest template Release if not present
+        if: ${{ vars.TEMPLATE_LATEST_RELEASE == '' }}
+        uses: octokit/request-action@v2.1.7
+        id: create_var_template_latest_release
+        with:
+          route: POST /repos/${{ github.repository}}/actions/variables
+          name: TEMPLATE_LATEST_RELEASE
+          value: '${{ steps.latest_release_name.outputs.value}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}         
+      - name: Compare latest template Release with last release update
+        if: ${{ vars.TEMPLATE_LATEST_RELEASE }}
+        id: compare_versions
+        continue-on-error: true
+        uses: jackbilestech/semver-compare@1.0.4
+        with:
+          head: '${{ steps.latest_release_name.outputs.value}'
+          base: '${{ vars.TEMPLATE_LATEST_RELEASE }}'
+          operator: '>'
+      - name: Print Compare Versions step
+        shell: bash
+        run: echo '${{ fromJSON(steps.compare_versions.outcome }}'
       - name: Update template release value
         uses: octokit/request-action@v2.1.7
         id: update_template_release

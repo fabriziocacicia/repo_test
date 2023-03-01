@@ -39,9 +39,6 @@ jobs:
           first: '${{ steps.latest_release_name.outputs.value }}'
           second: '${{ vars.TEMPLATE_LATEST_RELEASE }}'
           operator: '>'
-      - name: Print compare result
-        shell: bash
-        run: echo ${{ steps.compare_versions.outputs.result }}
       - name: Update template release value
         uses: octokit/request-action@v2.1.7
         if: ${{ fromJSON(steps.compare_versions.outputs.result) }}

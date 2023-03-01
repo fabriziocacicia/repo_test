@@ -41,6 +41,7 @@ jobs:
           operator: '>'
       - name: Update template release value
         uses: octokit/request-action@v2.1.7
+        if: ${{ steps.compare_versions.outputs.result }}
         id: update_template_release
         with:
           route: PATCH /repos/${{ github.repository}}/actions/variables/TEMPLATE_LATEST_RELEASE

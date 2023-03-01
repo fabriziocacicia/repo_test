@@ -34,10 +34,10 @@ jobs:
       - name: Compare latest template Release with last release update
         if: ${{ vars.TEMPLATE_LATEST_RELEASE }}
         id: compare_versions
-        uses: jackbilestech/semver-compare@1.0.4
+        uses: fabriziocacicia/semver-compare-action@0.1.0
         with:
-          head: '${{ steps.latest_release_name.outputs.value }}'
-          base: '${{ vars.TEMPLATE_LATEST_RELEASE }}'
+          first: '${{ steps.latest_release_name.outputs.value }}'
+          second: '${{ vars.TEMPLATE_LATEST_RELEASE }}'
           operator: '>'
       - name: Update template release value
         uses: octokit/request-action@v2.1.7

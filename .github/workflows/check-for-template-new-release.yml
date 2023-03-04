@@ -44,6 +44,7 @@ jobs:
         if: ${{ !fromJSON(steps.compare_versions.outputs.result) }}
         with:
           cancelMode: self
+          selfPreservation: false
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Update template release variable
         uses: octokit/request-action@v2.1.7

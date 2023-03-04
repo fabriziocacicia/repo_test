@@ -39,6 +39,12 @@ jobs:
           first: '${{ steps.latest_release_name.outputs.value }}'
           second: '${{ vars.TEMPLATE_LATEST_RELEASE }}'
           operator: '>'
+      - name: "Cancel Workflow"
+        uses: potiuk/cancel-workflow-runs@v4_7
+        if: ${{ !fromJSON(steps.compare_versions.outputs.result) }}
+        with:
+          cancelMode: self
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Update template release variable
         uses: octokit/request-action@v2.1.7
         if: ${{ fromJSON(steps.compare_versions.outputs.result) }}

@@ -39,7 +39,7 @@ jobs:
           first: '${{ steps.latest_release_name.outputs.value }}'
           second: '${{ vars.TEMPLATE_LATEST_RELEASE }}'
           operator: '>'
-      - name: "Cancel Workflow"
+      - name: "Cancel Workflow if no new Release"
         uses: potiuk/cancel-workflow-runs@v4_7
         if: ${{ !fromJSON(steps.compare_versions.outputs.result) }}
         with:

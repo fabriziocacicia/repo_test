@@ -17,7 +17,7 @@ jobs:
       - run: echo 'The triggering workflow passed'
   on-no-changes:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'skipped' }}
+    if: ${{ github.event.workflow_run.conclusion == 'skipped' }} || ${{ github.event.workflow_run.conclusion == 'canceled' }}
     steps:
       - run: echo 'The template has no new release'
   on-failure:

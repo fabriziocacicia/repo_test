@@ -10,12 +10,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo '${{ toJSON(github.event.workflow_run) }}'
-  on-new-changes:
+  on-new-release:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - run: echo 'The triggering workflow passed'
-  on-no-changes:
+      - name: Check if Template Latest Release is newer than the current based on
+        id: compare_versions
+        uses: fabriziocacicia/semver-compare-action@v0.1.0
+        with:
+          first: '${{ vars.TEMPLATE_LATEST_RELEASE }}'
+          second: '${{ vars.UPDATED_TO_TEMPLATE_RELEASE }}'
+          operator: '>'
+      - name: "Cancel Workflow if no new Release"
+        uses: potiuk/cancel-workflow-runs@v4_7
+        if: ${{ !fromJSON(steps.compare_versions.outputs.result) }}
+        with:
+          cancelMode: self
+          selfPreservation: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Config git user
+        shell: bash
+        run: |
+          git config user.name "Merge Template Changes Workflow"
+          git config user.email "<>"
+      - shell: bash
+        run: |
+          git checkout -b chore/merge_${{ vars.TEMPLATE_REPO }}_${{ vars.TEMPLATE_LATEST_RELEASE }}
+          git remote add template https://github.com/${{ vars.TEMPLATE_REPO }}.git
+          git pull template ${{ vars.TEMPLATE_LATEST_RELEASE }}
+          git push -u origin chore/merge_${{ vars.TEMPLATE_REPO }}_${{ vars.TEMPLATE_LATEST_RELEASE }}
+          gh pr create --base ${{ github.ref_name }} --head chore/merge_${{ vars.TEMPLATE_REPO }}_${{ vars.TEMPLATE_LATEST_RELEASE }} --title "chore: Merge ${{ vars.TEMPLATE_REPO }} ${{ vars.TEMPLATE_LATEST_RELEASE }} changes"    
+  on-no-new-release:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'skipped' }} || ${{ github.event.workflow_run.conclusion == 'canceled' }}
     steps:
